@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 from app.parsing import extract_text
 from app.extraction import extract_skills
@@ -56,3 +57,7 @@ async def analyze_resume(
         "sections_detected": sections_found,
         "category_checks": category_checks
     }
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
