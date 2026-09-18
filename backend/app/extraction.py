@@ -3,7 +3,7 @@ import re
 import spacy
 from pathlib import Path
 
-nlp = spacy.load("en_core_web_lg")
+nlp = spacy.load("en_core_web_sm")
 
 with open(Path(__file__).parent.parent / "data" / "skills_taxonomy.json") as f:
     TAXONOMY = json.load(f)
