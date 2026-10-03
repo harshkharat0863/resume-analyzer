@@ -11,4 +11,3 @@ bcrypt==4.0.1           # passlib is incompatible with bcrypt 5.x
 pdfplumber
 python-docx
 spacy                   # tokenizer only, no model download needed
-sentence-transformers   # pulls in torch + transformers
