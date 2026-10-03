@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Header
 from pydantic import BaseModel, EmailStr
 from bson import ObjectId
+import logging
 
 from app.database import users_collection, resumes_collection
 from app.auth import (
@@ -9,6 +10,7 @@ from app.auth import (
 )
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 class SignUpRequest(BaseModel):
@@ -92,12 +94,15 @@ def forgot_password(data: ForgotPasswordRequest):
 
     reset_token = create_reset_token(str(user["_id"]))
 
-    # NOTE: In production, email this link instead of returning it directly.
-    # For now (no email service configured), we return it so the demo works.
-    return {
-        "message": "Reset token generated (dev mode — normally this would be emailed).",
-        "reset_token": reset_token,
-    }
+    # TODO: In production wire this up to an email service (e.g. SendGrid / Resend).
+    # The token is intentionally NOT returned in the API response for security.
+    # For local dev, the token is printed to the server console log.
+    logger.warning(
+        "PASSWORD RESET TOKEN (dev only — replace with email service in production): %s",
+        reset_token,
+    )
+
+    return {"message": "If that email exists, a reset link has been sent."}
 
 
 @router.post("/auth/reset-password")

@@ -1,6 +1,10 @@
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from app.parsing import extract_text
 from app.extraction import extract_skills
@@ -11,11 +15,22 @@ from app.analysis import build_category_checks
 from app.routes_auth import router as auth_router
 from app.routes_history import router as history_router
 
-app = FastAPI()
+app = FastAPI(title="Resume Analyzer API")
+
+# Build allowed origins from environment (comma-separated) + always include localhost for dev
+_frontend_url = os.getenv("FRONTEND_URL", "")
+_allowed_origins = [o.strip() for o in _frontend_url.split(",") if o.strip()]
+_allowed_origins += [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:4173",
+    "http://127.0.0.1:4173",
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_allowed_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
