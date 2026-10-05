@@ -4,15 +4,7 @@ import { History, FileText, Trash2, ArrowRight, LogIn } from "lucide-react";
 import { getAllResults, deleteResult } from "../utils/resultsStore";
 import { useAuth } from "../context/AuthContext";
 import { getHistory, deleteHistory } from "../authApi";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const AMBER = "#D97706";
-const RED = "#E1493C";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, AMBER, RED, INK, GRAY, BORDER, BG } from "../theme";
 
 export default function ResumeHistory() {
   const [history, setHistory] = useState([]);
@@ -46,7 +38,7 @@ export default function ResumeHistory() {
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
           <History size={22} color={TEAL} />
         </div>
@@ -72,7 +64,7 @@ export default function ResumeHistory() {
       <div className="max-w-2xl mx-auto px-5 pt-10">
         {loading ? (
           <div className="flex justify-center py-16">
-            <span className="w-8 h-8 border-4 border-gray-200 border-t-[#0F9D77] rounded-full animate-spin" />
+            <span className="w-8 h-8 border-4  border-t-[#0F9D77] rounded-full animate-spin" />
           </div>
         ) : history.length === 0 ? (
           <div className="text-center py-16">
@@ -88,8 +80,8 @@ export default function ResumeHistory() {
               <div
                 key={h.id}
                 onClick={() => navigate(`/results/${h.id}`, { state: { result: h.result, filename: h.filename } })}
-                className="hover-lift bg-white rounded-2xl p-5 flex items-center justify-between gap-4 cursor-pointer animate-fade-in-up"
-                style={{ border: `1px solid ${BORDER}`, animationDelay: `${i * 40}ms` }}
+                className="hover-lift rounded-2xl p-5 flex items-center justify-between gap-4 cursor-pointer animate-fade-in-up"
+                style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: `${i * 40}ms` }}
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div

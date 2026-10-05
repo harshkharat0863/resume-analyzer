@@ -3,9 +3,11 @@ import { useState, useRef, useEffect } from "react";
 import {
   Menu, X, User, ArrowRight, ChevronDown, PenTool, Briefcase, MessageCircle,
   Sparkles, CheckCircle2, LayoutTemplate, FileSearch, Users, GraduationCap, Users2,
+  Sun, Moon,
 } from "lucide-react";
 import { TEAL, TEAL_BG, INK, GRAY, BORDER, fontHeading } from "../theme";
 import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 
 const tools = [
   { to: "/cover-letter", icon: PenTool, label: "Cover Letter Generator", desc: "Write a tailored cover letter" },
@@ -33,6 +35,45 @@ const orgUseCases = [
   { to: "/organizations#coaches", icon: Users2, label: "Career Coaches", desc: "Deliver ATS-friendly resumes faster" },
 ];
 
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="relative flex items-center justify-center w-9 h-9 rounded-lg transition-colors"
+      style={{ color: GRAY, background: "none", border: "none" }}
+      title={isDark ? "Light mode" : "Dark mode"}
+    >
+      <span
+        className="absolute inset-0 rounded-lg opacity-0 hover:opacity-100 transition-opacity"
+        style={{ backgroundColor: "var(--border)" }}
+      />
+      <span
+        className="relative transition-all duration-300"
+        style={{
+          transform: isDark ? "rotate(0deg) scale(1)" : "rotate(40deg) scale(0.8)",
+          opacity: isDark ? 1 : 0,
+          position: "absolute",
+        }}
+      >
+        <Sun size={17} color={GRAY} />
+      </span>
+      <span
+        className="relative transition-all duration-300"
+        style={{
+          transform: isDark ? "rotate(-40deg) scale(0.8)" : "rotate(0deg) scale(1)",
+          opacity: isDark ? 0 : 1,
+          position: "absolute",
+        }}
+      >
+        <Moon size={17} color={GRAY} />
+      </span>
+    </button>
+  );
+}
+
 export default function Navbar() {
   const location = useLocation();
   const { user, logout } = useAuth();
@@ -57,7 +98,10 @@ export default function Navbar() {
   const closeMenu = () => { setMenuOpen(false); setToolsOpen(false); setResumeOpen(false); setOrgOpen(false); };
 
   return (
-    <nav className="w-full bg-white sticky top-0 z-50" style={{ borderBottom: `1px solid ${BORDER}` }}>
+    <nav
+      className="w-full sticky top-0 z-50 transition-colors duration-200"
+      style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}
+    >
       <div className="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 no-underline group" onClick={closeMenu}>
           <div
@@ -92,8 +136,8 @@ export default function Navbar() {
 
             {resumeOpen && (
               <div
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[500px] bg-white rounded-2xl p-4 grid grid-cols-2 gap-4 animate-fade-in-up"
-                style={{ border: `1px solid ${BORDER}`, boxShadow: "0 12px 32px rgba(0,0,0,0.12)" }}
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[500px] rounded-2xl p-4 grid grid-cols-2 gap-4 animate-fade-in-up"
+                style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, boxShadow: "0 12px 32px var(--shadow-lg)" }}
               >
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-wide px-2 mb-1" style={{ color: GRAY }}>Tools</p>
@@ -102,7 +146,10 @@ export default function Navbar() {
                       key={item.label}
                       to={item.to}
                       onClick={closeMenu}
-                      className="flex items-start gap-3 p-2 rounded-xl no-underline transition-colors hover:bg-gray-50"
+                      className="flex items-start gap-3 p-2 rounded-xl no-underline transition-colors"
+                      style={{ color: "inherit" }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--bg)"}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
                     >
                       <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: TEAL_BG }}>
                         <item.icon size={15} color={TEAL} />
@@ -121,8 +168,10 @@ export default function Navbar() {
                       key={item.label}
                       to={item.to}
                       onClick={closeMenu}
-                      className="block p-2 rounded-xl text-sm no-underline transition-colors hover:bg-gray-50"
+                      className="block p-2 rounded-xl text-sm no-underline transition-colors"
                       style={{ color: TEAL }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--bg)"}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
                     >
                       {item.label}
                     </Link>
@@ -145,15 +194,18 @@ export default function Navbar() {
 
             {toolsOpen && (
               <div
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 bg-white rounded-2xl p-2 animate-fade-in-up"
-                style={{ border: `1px solid ${BORDER}`, boxShadow: "0 12px 32px rgba(0,0,0,0.12)" }}
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 rounded-2xl p-2 animate-fade-in-up"
+                style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, boxShadow: "0 12px 32px var(--shadow-lg)" }}
               >
                 {tools.map((tool) => (
                   <Link
                     key={tool.to}
                     to={tool.to}
                     onClick={closeMenu}
-                    className="flex items-start gap-3 p-3 rounded-xl no-underline transition-colors hover:bg-gray-50"
+                    className="flex items-start gap-3 p-3 rounded-xl no-underline transition-colors"
+                    style={{ color: "inherit" }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--bg)"}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
                   >
                     <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: TEAL_BG }}>
                       <tool.icon size={16} color={TEAL} />
@@ -181,8 +233,8 @@ export default function Navbar() {
 
             {orgOpen && (
               <div
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 bg-white rounded-2xl p-4 animate-fade-in-up"
-                style={{ border: `1px solid ${BORDER}`, boxShadow: "0 12px 32px rgba(0,0,0,0.12)" }}
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 rounded-2xl p-4 animate-fade-in-up"
+                style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, boxShadow: "0 12px 32px var(--shadow-lg)" }}
               >
                 <p className="text-[11px] font-semibold uppercase tracking-wide px-2 mb-1" style={{ color: GRAY }}>Use Cases</p>
                 {orgUseCases.map((item) => (
@@ -190,7 +242,10 @@ export default function Navbar() {
                     key={item.to}
                     to={item.to}
                     onClick={closeMenu}
-                    className="flex items-start gap-3 p-2 rounded-xl no-underline transition-colors hover:bg-gray-50"
+                    className="flex items-start gap-3 p-2 rounded-xl no-underline transition-colors"
+                    style={{ color: "inherit" }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--bg)"}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
                   >
                     <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: TEAL_BG }}>
                       <item.icon size={16} color={TEAL} />
@@ -223,13 +278,16 @@ export default function Navbar() {
           <button
             onClick={() => document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true }))}
             className="hidden lg:flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg"
-            style={{ backgroundColor: "#F6F7F9", color: GRAY, border: `1px solid ${BORDER}` }}
+            style={{ backgroundColor: "var(--bg-search)", color: GRAY, border: `1px solid ${BORDER}` }}
           >
             Search
-            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded" style={{ backgroundColor: "#fff", border: `1px solid ${BORDER}` }}>
+            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
               Ctrl K
             </span>
           </button>
+
+          {/* Theme toggle */}
+          <ThemeToggle />
 
           {user ? (
             <div className="flex items-center gap-3">
@@ -257,19 +315,25 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile hamburger button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex items-center justify-center w-9 h-9 transition-transform duration-200 active:scale-90"
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={22} color={INK} /> : <Menu size={22} color={INK} />}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div className="md:hidden flex items-center gap-1">
+          <ThemeToggle />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="flex items-center justify-center w-9 h-9 transition-transform duration-200 active:scale-90"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={22} color={INK} /> : <Menu size={22} color={INK} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white px-5 pb-5 pt-2 space-y-1 animate-fade-in-up max-h-[80vh] overflow-y-auto" style={{ borderTop: `1px solid ${BORDER}` }}>
+        <div
+          className="md:hidden px-5 pb-5 pt-2 space-y-1 animate-fade-in-up max-h-[80vh] overflow-y-auto"
+          style={{ backgroundColor: "var(--bg-card)", borderTop: `1px solid ${BORDER}` }}
+        >
           <Link to="/" onClick={closeMenu} className="block py-2.5 text-sm no-underline font-medium" style={{ color: INK }}>Home</Link>
 
           <p className="text-xs font-semibold uppercase tracking-wide pt-3 pb-1" style={{ color: GRAY }}>Resume</p>

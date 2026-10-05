@@ -3,17 +3,7 @@ import {
   ClipboardCheck, PenLine, Layers, Target, TrendingUp, Flag, ShieldAlert,
   ChevronDown, ChevronUp, CheckCircle2, XCircle, Sparkles,
 } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const RED = "#E1493C";
-const RED_BG = "#FDECEB";
-const AMBER = "#D97706";
-const AMBER_BG = "#FEF3C7";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, RED, RED_BG, AMBER, AMBER_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const CATEGORY_META = {
   content: {
@@ -79,7 +69,7 @@ const CHECK_NOTES = {
 function CheckDetailCard({ check }) {
   const note = CHECK_NOTES[check.label] || "This affects how ATS systems and recruiters evaluate your resume.";
   return (
-    <div className="hover-lift bg-white rounded-2xl p-6" style={{ border: `1px solid ${BORDER}` }}>
+    <div className="hover-lift  rounded-2xl p-6" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
       <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide mb-3" style={{ color: INK }}>
         {check.label}
       </p>
@@ -134,7 +124,7 @@ export default function CategoryReport({ categoryChecks }) {
     <div className="grid md:grid-cols-[240px_1fr] gap-6">
       {/* Sidebar */}
       <div className="hidden md:block">
-        <div className="hover-lift bg-white rounded-2xl p-4 sticky top-20" style={{ border: `1px solid ${BORDER}` }}>
+        <div className="hover-lift  rounded-2xl p-4 sticky top-20" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
           <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide px-2 mb-2" style={{ color: GRAY }}>
             <Sparkles size={13} /> Full Report
           </p>

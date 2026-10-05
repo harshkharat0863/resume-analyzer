@@ -7,15 +7,7 @@ import {
 import { useAuth } from "../context/AuthContext";
 import { getHistory } from "../authApi";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const AMBER = "#D97706";
-const RED = "#E1493C";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, AMBER, RED, INK, GRAY, BORDER, BG } from "../theme";
 
 const quickActions = [
   { to: "/", icon: FileText, label: "Analyze Resume", desc: "Check a new resume" },
@@ -58,7 +50,7 @@ export default function Dashboard() {
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
       {/* Header */}
-      <div className="py-10 px-5" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="py-10 px-5" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="max-w-5xl mx-auto flex items-center gap-4">
           <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl flex-shrink-0"
@@ -77,8 +69,8 @@ export default function Dashboard() {
           </div>
           <button
             onClick={() => navigate("/settings")}
-            className="hover-lift flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-lg bg-white flex-shrink-0"
-            style={{ border: `1px solid ${BORDER}`, color: INK }}
+            className="hover-lift flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-lg flex-shrink-0"
+            style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, color: INK }}
           >
             <SettingsIcon size={14} />
             Settings
@@ -89,21 +81,21 @@ export default function Dashboard() {
       <div className="max-w-5xl mx-auto px-5 pt-8 space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-3 gap-4">
-          <div className="hover-lift bg-white rounded-2xl p-5 animate-fade-in-up" style={{ border: `1px solid ${BORDER}` }}>
+          <div className="hover-lift rounded-2xl p-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
             <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3" style={{ backgroundColor: TEAL_BG }}>
               <FileText size={16} color={TEAL} />
             </div>
             <p className="text-2xl font-bold" style={{ color: INK, fontFamily: "'Manrope', sans-serif" }}>{totalAnalyses}</p>
             <p className="text-xs" style={{ color: GRAY }}>Resumes analyzed</p>
           </div>
-          <div className="hover-lift bg-white rounded-2xl p-5 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "60ms" }}>
+          <div className="hover-lift rounded-2xl p-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "60ms" }}>
             <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3" style={{ backgroundColor: TEAL_BG }}>
               <TrendingUp size={16} color={TEAL} />
             </div>
             <p className="text-2xl font-bold" style={{ color: INK, fontFamily: "'Manrope', sans-serif" }}>{avgScore}%</p>
             <p className="text-xs" style={{ color: GRAY }}>Average match score</p>
           </div>
-          <div className="hover-lift bg-white rounded-2xl p-5 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "120ms" }}>
+          <div className="hover-lift rounded-2xl p-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "120ms" }}>
             <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3" style={{ backgroundColor: TEAL_BG }}>
               <Award size={16} color={TEAL} />
             </div>
@@ -114,7 +106,7 @@ export default function Dashboard() {
 
         {/* Score trend chart */}
         {history.length > 1 && (
-          <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "140ms" }}>
+          <div className="hover-lift rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "140ms" }}>
             <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
               <TrendingUp size={13} /> Score Trend
             </p>
@@ -125,11 +117,11 @@ export default function Dashboard() {
                   score: Math.round(h.result.match_percentage),
                 }))}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#F0F0F0" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--grid)" />
                 <XAxis dataKey="name" tick={{ fontSize: 11, fill: GRAY }} />
                 <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: GRAY }} />
                 <Tooltip
-                  contentStyle={{ borderRadius: 10, border: `1px solid ${BORDER}`, fontSize: 12 }}
+                  contentStyle={{ borderRadius: 10, border: `1px solid ${BORDER}`, fontSize: 12, backgroundColor: "var(--bg-card)", color: GRAY }}
                   formatter={(value) => [`${value}%`, "Match Score"]}
                 />
                 <Line type="monotone" dataKey="score" stroke={TEAL} strokeWidth={2.5} dot={{ fill: TEAL, r: 4 }} />
@@ -139,7 +131,7 @@ export default function Dashboard() {
         )}
 
         {/* Quick actions */}
-        <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "160ms" }}>
+        <div className="hover-lift rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "160ms" }}>
           <p className="text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>Quick Actions</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {quickActions.map((action) => (
@@ -160,7 +152,7 @@ export default function Dashboard() {
         </div>
 
         {/* Recent activity */}
-        <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "220ms" }}>
+        <div className="hover-lift rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "220ms" }}>
           <div className="flex items-center justify-between mb-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide" style={{ color: GRAY }}>
               <Clock size={13} /> Recent Activity
@@ -174,7 +166,7 @@ export default function Dashboard() {
 
           {loading ? (
             <div className="flex justify-center py-10">
-              <span className="w-6 h-6 border-4 border-gray-200 border-t-[#0F9D77] rounded-full animate-spin" />
+              <span className="w-6 h-6 border-4 rounded-full animate-spin" style={{ borderColor: "var(--border)", borderTopColor: TEAL }} />
             </div>
           ) : recent.length === 0 ? (
             <div className="text-center py-10">
@@ -193,7 +185,9 @@ export default function Dashboard() {
                 <div
                   key={h.id}
                   onClick={() => navigate(`/results/${h.id}`, { state: { result: h.result, filename: h.filename } })}
-                  className="flex items-center justify-between gap-3 p-3 rounded-xl cursor-pointer transition-colors hover:bg-gray-50"
+                  className="flex items-center justify-between gap-3 p-3 rounded-xl cursor-pointer transition-colors"
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--bg)"}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div
@@ -215,7 +209,7 @@ export default function Dashboard() {
         </div>
 
         {/* Account info */}
-        <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "260ms" }}>
+        <div className="hover-lift rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "260ms" }}>
           <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
             <User size={13} /> Account Details
           </p>

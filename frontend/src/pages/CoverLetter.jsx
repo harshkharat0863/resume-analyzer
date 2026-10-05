@@ -1,13 +1,7 @@
 import { useState } from "react";
 import jsPDF from "jspdf";
 import { PenTool, Copy, Download, Check } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 function generateLetter({ name, role, company, skills, tone }) {
   const skillsList = skills.split(",").map((s) => s.trim()).filter(Boolean);
@@ -73,7 +67,7 @@ export default function CoverLetter() {
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div
           className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4"
           style={{ backgroundColor: TEAL_BG }}
@@ -90,14 +84,14 @@ export default function CoverLetter() {
 
       <div className="max-w-4xl mx-auto px-5 pt-10 grid md:grid-cols-2 gap-6">
         {/* Form */}
-        <form onSubmit={handleGenerate} className="hover-lift bg-white rounded-2xl p-6 space-y-4 h-fit animate-fade-in-up" style={{ border: `1px solid ${BORDER}` }}>
+        <form onSubmit={handleGenerate} className="hover-lift rounded-2xl p-6 space-y-4 h-fit animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wide mb-1.5" style={{ color: GRAY }}>Your Name</label>
             <input
               type="text" value={name} onChange={(e) => setName(e.target.value)}
               placeholder="Harshwardhan Kharat" required
               className="w-full rounded-xl p-3 text-sm focus:outline-none"
-              style={{ border: `1px solid ${BORDER}`, color: INK }}
+              style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
             />
           </div>
           <div>
@@ -106,7 +100,7 @@ export default function CoverLetter() {
               type="text" value={role} onChange={(e) => setRole(e.target.value)}
               placeholder="Python Developer" required
               className="w-full rounded-xl p-3 text-sm focus:outline-none"
-              style={{ border: `1px solid ${BORDER}`, color: INK }}
+              style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
             />
           </div>
           <div>
@@ -115,7 +109,7 @@ export default function CoverLetter() {
               type="text" value={company} onChange={(e) => setCompany(e.target.value)}
               placeholder="Acme Corp" required
               className="w-full rounded-xl p-3 text-sm focus:outline-none"
-              style={{ border: `1px solid ${BORDER}`, color: INK }}
+              style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
             />
           </div>
           <div>
@@ -124,7 +118,7 @@ export default function CoverLetter() {
               type="text" value={skills} onChange={(e) => setSkills(e.target.value)}
               placeholder="Python, SQL, AWS" required
               className="w-full rounded-xl p-3 text-sm focus:outline-none"
-              style={{ border: `1px solid ${BORDER}`, color: INK }}
+              style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
             />
           </div>
           <div>
@@ -155,7 +149,7 @@ export default function CoverLetter() {
         </form>
 
         {/* Preview */}
-        <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "100ms" }}>
+        <div className="hover-lift rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "100ms" }}>
           {letter ? (
             <>
               <div className="flex justify-between items-center mb-4">

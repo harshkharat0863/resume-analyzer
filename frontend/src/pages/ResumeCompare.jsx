@@ -4,16 +4,7 @@ import { GitCompare, ArrowLeftRight, TrendingUp, Check, X, Trophy } from "lucide
 import { useAuth } from "../context/AuthContext";
 import { getHistory } from "../authApi";
 import { getAllResults } from "../utils/resultsStore";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const AMBER = "#D97706";
-const RED = "#E1493C";
-const RED_BG = "#FDECEB";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, AMBER, RED, RED_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 function scoreColor(score) {
   return score >= 75 ? TEAL : score >= 50 ? AMBER : RED;
@@ -29,7 +20,7 @@ function ScoreCard({ item }) {
   }
   const score = Math.round(item.result.match_percentage);
   return (
-    <div className="flex-1 rounded-2xl p-6 text-center" style={{ backgroundColor: "#fff", border: `1px solid ${BORDER}` }}>
+    <div className="flex-1 rounded-2xl p-6 text-center" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
       <p className="text-sm font-semibold mb-3 truncate" style={{ color: INK }}>{item.filename}</p>
       <p className="text-4xl font-extrabold mb-1" style={{ color: scoreColor(score), fontFamily: "'Manrope', sans-serif" }}>{score}%</p>
       <p className="text-xs" style={{ color: GRAY }}>Match Score</p>
@@ -67,7 +58,7 @@ export default function ResumeCompare() {
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
           <GitCompare size={22} color={TEAL} />
         </div>
@@ -82,7 +73,7 @@ export default function ResumeCompare() {
       <div className="max-w-4xl mx-auto px-5 pt-10">
         {loading ? (
           <div className="flex justify-center py-16">
-            <span className="w-8 h-8 border-4 border-gray-200 border-t-[#0F9D77] rounded-full animate-spin" />
+            <span className="w-8 h-8 border-4  border-t-[#0F9D77] rounded-full animate-spin" />
           </div>
         ) : history.length < 2 ? (
           <div className="text-center py-16">
@@ -101,8 +92,8 @@ export default function ResumeCompare() {
               <select
                 value={leftId}
                 onChange={(e) => setLeftId(e.target.value)}
-                className="w-full rounded-xl p-3 text-sm focus:outline-none bg-white"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                className="w-full rounded-xl p-3 text-sm focus:outline-none"
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               >
                 <option value="">Select first resume...</option>
                 {history.map((h) => (
@@ -114,8 +105,8 @@ export default function ResumeCompare() {
               <select
                 value={rightId}
                 onChange={(e) => setRightId(e.target.value)}
-                className="w-full rounded-xl p-3 text-sm focus:outline-none bg-white"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                className="w-full rounded-xl p-3 text-sm focus:outline-none"
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               >
                 <option value="">Select second resume...</option>
                 {history.map((h) => (
@@ -147,7 +138,7 @@ export default function ResumeCompare() {
                 {/* Skills comparison */}
                 <div className="grid md:grid-cols-2 gap-4 animate-fade-in-up">
                   {[left, right].map((item, idx) => (
-                    <div key={idx} className="hover-lift bg-white rounded-2xl p-6" style={{ border: `1px solid ${BORDER}` }}>
+                    <div key={idx} className="hover-lift rounded-2xl p-6" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
                       <p className="text-xs font-semibold uppercase tracking-wide mb-4 truncate" style={{ color: GRAY }}>
                         {item.filename}
                       </p>

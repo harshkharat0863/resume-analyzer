@@ -1,17 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Settings as SettingsIcon, User, Lock, Trash2, ShieldCheck, AlertTriangle } from "lucide-react";
+import { Settings as SettingsIcon, User, Lock, Trash2, AlertTriangle } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { updateProfile, changePassword, deleteAccount } from "../authApi";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const RED = "#E1493C";
-const RED_BG = "#FDECEB";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, RED, RED_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 export default function Settings() {
   const { user, token, updateUser, logout } = useAuth();
@@ -80,7 +72,7 @@ export default function Settings() {
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
           <SettingsIcon size={22} color={TEAL} />
         </div>
@@ -94,7 +86,7 @@ export default function Settings() {
 
       <div className="max-w-xl mx-auto px-5 pt-10 space-y-6">
         {/* Profile */}
-        <form onSubmit={handleNameUpdate} className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}` }}>
+        <form onSubmit={handleNameUpdate} className="hover-lift rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
           <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
             <User size={13} /> Profile
           </p>
@@ -104,7 +96,7 @@ export default function Settings() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-full rounded-xl p-3 text-sm focus:outline-none mb-3"
-            style={{ border: `1px solid ${BORDER}`, color: INK }}
+            style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
           />
           <label className="block text-xs font-semibold uppercase tracking-wide mb-1.5" style={{ color: GRAY }}>Email</label>
           <input
@@ -128,7 +120,7 @@ export default function Settings() {
         </form>
 
         {/* Password */}
-        <form onSubmit={handlePasswordChange} className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "80ms" }}>
+        <form onSubmit={handlePasswordChange} className="hover-lift rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "80ms" }}>
           <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
             <Lock size={13} /> Change Password
           </p>
@@ -139,7 +131,7 @@ export default function Settings() {
             onChange={(e) => setCurrentPassword(e.target.value)}
             required
             className="w-full rounded-xl p-3 text-sm focus:outline-none mb-3"
-            style={{ border: `1px solid ${BORDER}`, color: INK }}
+            style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
           />
           <label className="block text-xs font-semibold uppercase tracking-wide mb-1.5" style={{ color: GRAY }}>New Password</label>
           <input
@@ -149,7 +141,7 @@ export default function Settings() {
             required
             minLength={6}
             className="w-full rounded-xl p-3 text-sm focus:outline-none mb-4"
-            style={{ border: `1px solid ${BORDER}`, color: INK }}
+            style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
           />
           {passMsg && <p className="text-xs mb-3" style={{ color: TEAL }}>{passMsg}</p>}
           {passError && <p className="text-xs mb-3" style={{ color: RED }}>{passError}</p>}
@@ -164,7 +156,7 @@ export default function Settings() {
         </form>
 
         {/* Danger zone */}
-        <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${RED_BG}`, animationDelay: "160ms" }}>
+        <div className="hover-lift rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${RED_BG}`, animationDelay: "160ms" }}>
           <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: RED }}>
             <AlertTriangle size={13} /> Danger Zone
           </p>
@@ -195,8 +187,8 @@ export default function Settings() {
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
-                  className="px-4 py-2 rounded-lg text-sm font-medium bg-white"
-                  style={{ color: INK, border: `1px solid ${BORDER}` }}
+                  className="px-4 py-2 rounded-lg text-sm font-medium"
+                  style={{ color: INK, border: `1px solid ${BORDER}`, backgroundColor: "var(--bg-card)" }}
                 >
                   Cancel
                 </button>

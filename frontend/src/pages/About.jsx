@@ -2,13 +2,7 @@ import { useNavigate } from "react-router-dom";
 import {
   FileText, Search, Brain, BarChart3, Lightbulb, FileOutput, ArrowRight,
 } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const steps = [
   {
@@ -68,7 +62,7 @@ export default function About() {
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }}>
       {/* Hero */}
-      <div className="py-16 text-center animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="py-16 text-center animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="max-w-2xl mx-auto px-5">
           <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-5 tracking-wide" style={{ backgroundColor: TEAL_BG, color: TEAL }}>
             HOW IT WORKS
@@ -93,8 +87,8 @@ export default function About() {
           {steps.map((step, i) => (
             <div
               key={step.title}
-              className="hover-lift bg-white rounded-2xl p-6 flex gap-5 animate-fade-in-up"
-              style={{ border: `1px solid ${BORDER}`, animationDelay: `${i * 60}ms` }}
+              className="hover-lift rounded-2xl p-6 flex gap-5 animate-fade-in-up"
+              style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: `${i * 60}ms` }}
             >
               <div className="flex-shrink-0 flex flex-col items-center gap-2">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: TEAL_BG }}>
@@ -119,7 +113,7 @@ export default function About() {
       </div>
 
       {/* Tech stack */}
-      <div className="py-16" style={{ backgroundColor: "#fff", borderTop: `1px solid ${BORDER}` }}>
+      <div className="py-16" style={{ backgroundColor: "var(--bg-card)", borderTop: `1px solid ${BORDER}` }}>
         <div className="max-w-3xl mx-auto px-5">
           <h2 className="text-xl font-bold mb-8 text-center" style={{ color: INK }}>
             Tech stack
@@ -145,7 +139,7 @@ export default function About() {
         </h2>
         <div className="space-y-3">
           {faqs.map((faq) => (
-            <div key={faq.q} className="hover-lift bg-white rounded-2xl p-5" style={{ border: `1px solid ${BORDER}` }}>
+            <div key={faq.q} className="hover-lift rounded-2xl p-5" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
               <p className="font-semibold text-[14px] mb-1.5" style={{ color: INK }}>{faq.q}</p>
               <p className="text-sm leading-relaxed" style={{ color: GRAY }}>{faq.a}</p>
             </div>
@@ -154,9 +148,9 @@ export default function About() {
       </div>
 
       {/* CTA */}
-      <div className="py-16 text-center" style={{ backgroundColor: INK }}>
+      <div className="py-16 text-center" style={{ backgroundColor: "var(--dark-bg)" }}>
         <h2 className="text-2xl font-bold text-white mb-3">Ready to analyze your resume?</h2>
-        <p className="text-sm mb-6" style={{ color: "#9CA3AF" }}>Free, instant, no sign-up required.</p>
+        <p className="text-sm mb-6" style={{ color: "var(--dark-gray)" }}>Free, instant, no sign-up required.</p>
         <button
           onClick={() => navigate("/")}
           className="hover-lift inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white"

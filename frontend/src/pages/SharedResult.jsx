@@ -2,15 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Share2, CheckCircle2, TrendingUp, FileQuestion, ArrowRight } from "lucide-react";
 import { getSharedResult } from "../authApi";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const AMBER = "#D97706";
-const RED = "#E1493C";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, AMBER, RED, INK, GRAY, BORDER, BG } from "../theme";
 
 function scoreColor(score) {
   return score >= 75 ? TEAL : score >= 50 ? AMBER : RED;
@@ -33,7 +25,7 @@ export default function SharedResult() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: BG }}>
-        <span className="w-8 h-8 border-4 border-gray-200 border-t-[#0F9D77] rounded-full animate-spin" />
+        <span className="w-8 h-8 border-4  border-t-[#0F9D77] rounded-full animate-spin" />
       </div>
     );
   }
@@ -58,7 +50,7 @@ export default function SharedResult() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-5 py-10" style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }}>
-      <div className="hover-lift bg-white rounded-2xl p-8 w-full max-w-md animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
+      <div className="hover-lift rounded-2xl p-8 w-full max-w-md animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px var(--shadow)" }}>
         <div className="flex items-center gap-2 justify-center mb-6">
           <Share2 size={14} color={GRAY} />
           <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: GRAY }}>Shared Resume Score</p>
@@ -67,7 +59,7 @@ export default function SharedResult() {
         <div className="text-center mb-6">
           <div className="relative w-32 h-32 mx-auto mb-4">
             <svg viewBox="0 0 120 120" className="w-32 h-32 -rotate-90">
-              <circle cx="60" cy="60" r="52" fill="none" stroke="#EDEFF2" strokeWidth="10" />
+              <circle cx="60" cy="60" r="52" fill="none" stroke="var(--track)" strokeWidth="10" />
               <circle
                 cx="60" cy="60" r="52" fill="none" stroke={color} strokeWidth="10" strokeLinecap="round"
                 strokeDasharray={2 * Math.PI * 52}

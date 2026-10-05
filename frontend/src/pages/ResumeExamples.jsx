@@ -1,11 +1,5 @@
 import { FileSearch, TrendingUp } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const examples = [
   {
@@ -43,7 +37,7 @@ const examples = [
 export default function ResumeExamples() {
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
           <FileSearch size={22} color={TEAL} />
         </div>
@@ -59,8 +53,8 @@ export default function ResumeExamples() {
         {examples.map((ex, i) => (
           <div
             key={ex.role}
-            className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up"
-            style={{ border: `1px solid ${BORDER}`, animationDelay: `${i * 80}ms` }}
+            className="hover-lift rounded-2xl p-6 animate-fade-in-up"
+            style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: `${i * 80}ms` }}
           >
             <h2 className="text-lg font-bold mb-2" style={{ color: INK, fontFamily: "'Manrope', sans-serif" }}>{ex.role}</h2>
             <p className="text-sm leading-relaxed mb-4 italic" style={{ color: GRAY }}>"{ex.summary}"</p>

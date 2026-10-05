@@ -1,16 +1,22 @@
-export const TEAL = "#0F9D77";
-export const TEAL_BG = "#E7F7F1";
-export const RED = "#E1493C";
-export const RED_BG = "#FDECEB";
-export const AMBER = "#D97706";
-export const AMBER_BG = "#FEF3C7";
-export const BLUE = "#3B82F6";
-export const BLUE_BG = "#EFF6FF";
-export const INK = "#131B2E";
-export const GRAY = "#6B7280";
-export const BORDER = "#E5E7EB";
-export const BG = "#F6F7F9";
-export const DARK = "#0D1117";
+// Brand colors — now map to CSS custom properties so they react to the .dark class
+export const TEAL       = "var(--teal)";
+export const TEAL_BG    = "var(--teal-bg)";
+export const RED        = "var(--red)";
+export const RED_BG     = "var(--red-bg)";
+export const AMBER      = "var(--amber)";
+export const AMBER_BG   = "var(--amber-bg)";
+export const BLUE       = "var(--blue)";
+export const BLUE_BG    = "var(--blue-bg)";
 
+// Text
+export const INK        = "var(--ink)";
+export const GRAY       = "var(--gray)";
+
+// Surfaces
+export const BG         = "var(--bg)";
+export const BORDER     = "var(--border)";
+export const DARK       = "var(--dark-bg)";
+
+// Typography
 export const fontHeading = "'Manrope', sans-serif";
-export const fontBody = "'Inter', sans-serif";
+export const fontBody    = "'Inter', sans-serif";

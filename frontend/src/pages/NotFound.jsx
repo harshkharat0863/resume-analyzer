@@ -1,12 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FileQuestion, Home, ArrowLeft } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -32,8 +26,8 @@ export default function NotFound() {
       <div className="flex gap-3">
         <button
           onClick={() => navigate(-1)}
-          className="hover-lift flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border bg-white"
-          style={{ borderColor: BORDER, color: INK }}
+          className="hover-lift flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border"
+          style={{ borderColor: BORDER, color: INK, backgroundColor: "var(--bg-card)" }}
         >
           <ArrowLeft size={16} />
           Go Back

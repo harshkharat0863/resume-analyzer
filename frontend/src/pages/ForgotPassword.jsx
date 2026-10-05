@@ -2,15 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, KeyRound, ArrowRight, Copy, Check, AlertTriangle } from "lucide-react";
 import { forgotPassword } from "../authApi";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const AMBER = "#D97706";
-const AMBER_BG = "#FEF3C7";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, AMBER, AMBER_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -44,7 +36,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-5 py-10" style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }}>
-      <div className="hover-lift bg-white rounded-2xl p-8 w-full max-w-md animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
+      <div className="hover-lift rounded-2xl p-8 w-full max-w-md animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px var(--shadow)" }}>
         <div className="text-center mb-6">
           <div className="w-11 h-11 rounded-xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
             <KeyRound size={20} color={TEAL} />
@@ -65,7 +57,7 @@ export default function ForgotPassword() {
                 placeholder="you@example.com"
                 required
                 className="w-full rounded-xl p-3 pl-10 text-sm focus:outline-none"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               />
             </div>
           </div>
@@ -98,7 +90,7 @@ export default function ForgotPassword() {
             <p className="text-xs mb-3" style={{ color: INK }}>
               In a live app, this token would be emailed to you. For now, copy it below and paste it on the reset page.
             </p>
-            <div className="flex items-center gap-2 bg-white rounded-lg p-2 mb-3">
+            <div className="flex items-center gap-2 rounded-lg p-2 mb-3" style={{ backgroundColor: "var(--bg-card)" }}>
               <code className="text-xs flex-1 truncate" style={{ color: INK }}>{resetToken}</code>
               <button onClick={handleCopy} className="flex-shrink-0">
                 {copied ? <Check size={15} color={TEAL} /> : <Copy size={15} color={GRAY} />}

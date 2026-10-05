@@ -2,15 +2,7 @@ import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Lock, ShieldCheck, ArrowRight } from "lucide-react";
 import { resetPassword } from "../authApi";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const RED = "#E1493C";
-const RED_BG = "#FDECEB";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, RED, RED_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
@@ -38,7 +30,7 @@ export default function ResetPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-5 py-10" style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }}>
-      <div className="hover-lift bg-white rounded-2xl p-8 w-full max-w-md animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
+      <div className="hover-lift rounded-2xl p-8 w-full max-w-md animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px var(--shadow)" }}>
         <div className="text-center mb-6">
           <div className="w-11 h-11 rounded-xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
             <Lock size={20} color={TEAL} />
@@ -64,7 +56,7 @@ export default function ResetPassword() {
                 placeholder="Paste your token here"
                 required
                 className="w-full rounded-xl p-3 text-sm focus:outline-none"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               />
             </div>
             <div>
@@ -77,7 +69,7 @@ export default function ResetPassword() {
                 required
                 minLength={6}
                 className="w-full rounded-xl p-3 text-sm focus:outline-none"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               />
             </div>
 

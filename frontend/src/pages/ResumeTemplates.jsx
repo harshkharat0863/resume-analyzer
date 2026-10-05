@@ -1,12 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { LayoutTemplate, Check } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const templates = [
   {
@@ -48,15 +42,15 @@ function TemplatePreview({ template }) {
     return (
       <div className="w-full h-full flex rounded-lg overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
         <div className="w-1/3 h-full p-2" style={{ backgroundColor: template.accent }}>
-          <div className="w-6 h-6 rounded-full bg-white/30 mb-2" />
-          <div className="h-1 w-full bg-white/40 rounded mb-1" />
-          <div className="h-1 w-2/3 bg-white/40 rounded" />
+          <div className="w-6 h-6 rounded-full /30 mb-2" style={{ backgroundColor: "var(--bg-card)" }} />
+          <div className="h-1 w-full /40 rounded mb-1" style={{ backgroundColor: "var(--bg-card)" }} />
+          <div className="h-1 w-2/3 /40 rounded" style={{ backgroundColor: "var(--bg-card)" }} />
         </div>
         <div className="flex-1 p-2 space-y-1.5">
           <div className="h-1.5 w-1/2 rounded" style={{ backgroundColor: template.accent }} />
-          <div className="h-1 w-full bg-gray-200 rounded" />
-          <div className="h-1 w-full bg-gray-200 rounded" />
-          <div className="h-1 w-3/4 bg-gray-200 rounded" />
+          <div className="h-1 w-full rounded" style={{ backgroundColor: "var(--track)" }} />
+          <div className="h-1 w-full rounded" style={{ backgroundColor: "var(--track)" }} />
+          <div className="h-1 w-3/4 rounded" style={{ backgroundColor: "var(--track)" }} />
         </div>
       </div>
     );
@@ -65,11 +59,11 @@ function TemplatePreview({ template }) {
     return (
       <div className="w-full h-full rounded-lg p-3 flex flex-col items-center" style={{ border: `1px solid ${BORDER}` }}>
         <div className="h-2 w-1/2 rounded mb-1" style={{ backgroundColor: template.accent }} />
-        <div className="h-1 w-1/3 bg-gray-200 rounded mb-3" />
-        <div className="w-full h-px bg-gray-200 mb-2" />
-        <div className="h-1 w-full bg-gray-200 rounded mb-1" />
-        <div className="h-1 w-full bg-gray-200 rounded mb-1" />
-        <div className="h-1 w-2/3 bg-gray-200 rounded" />
+        <div className="h-1 w-1/3 rounded mb-3" style={{ backgroundColor: "var(--track)" }} />
+        <div className="w-full h-px mb-2" style={{ backgroundColor: "var(--track)" }} />
+        <div className="h-1 w-full rounded mb-1" style={{ backgroundColor: "var(--track)" }} />
+        <div className="h-1 w-full rounded mb-1" style={{ backgroundColor: "var(--track)" }} />
+        <div className="h-1 w-2/3 rounded" style={{ backgroundColor: "var(--track)" }} />
       </div>
     );
   }
@@ -78,7 +72,7 @@ function TemplatePreview({ template }) {
       <div className="w-full h-full rounded-lg p-2 space-y-1" style={{ border: `1px solid ${BORDER}` }}>
         <div className="h-1.5 w-2/5 rounded" style={{ backgroundColor: template.accent }} />
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="h-0.5 w-full bg-gray-200 rounded" />
+          <div key={i} className="h-0.5 w-full rounded" style={{ backgroundColor: "var(--track)" }} />
         ))}
       </div>
     );
@@ -86,10 +80,10 @@ function TemplatePreview({ template }) {
   return (
     <div className="w-full h-full rounded-lg p-3 space-y-1.5" style={{ border: `1px solid ${BORDER}` }}>
       <div className="h-2 w-1/2 rounded" style={{ backgroundColor: template.accent }} />
-      <div className="h-1 w-1/3 bg-gray-200 rounded mb-2" />
-      <div className="h-1 w-full bg-gray-200 rounded" />
-      <div className="h-1 w-full bg-gray-200 rounded" />
-      <div className="h-1 w-3/4 bg-gray-200 rounded" />
+      <div className="h-1 w-1/3 rounded mb-2" style={{ backgroundColor: "var(--track)" }} />
+      <div className="h-1 w-full rounded" style={{ backgroundColor: "var(--track)" }} />
+      <div className="h-1 w-full rounded" style={{ backgroundColor: "var(--track)" }} />
+      <div className="h-1 w-3/4 rounded" style={{ backgroundColor: "var(--track)" }} />
     </div>
   );
 }
@@ -99,7 +93,7 @@ export default function ResumeTemplates() {
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
           <LayoutTemplate size={22} color={TEAL} />
         </div>
@@ -116,8 +110,8 @@ export default function ResumeTemplates() {
           {templates.map((t, i) => (
             <div
               key={t.id}
-              className="hover-lift bg-white rounded-2xl p-5 animate-fade-in-up"
-              style={{ border: `1px solid ${BORDER}`, animationDelay: `${i * 60}ms` }}
+              className="hover-lift rounded-2xl p-5 animate-fade-in-up"
+              style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: `${i * 60}ms` }}
             >
               <div className="h-44 mb-4">
                 <TemplatePreview template={t} />

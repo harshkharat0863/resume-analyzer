@@ -11,24 +11,14 @@ import {
   Paperclip, Download, RotateCw, Check, X, ListChecks, ShieldCheck,
   Layers, Tags, Lightbulb, FileQuestion, TrendingUp,
 } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const RED = "#E1493C";
-const RED_BG = "#FDECEB";
-const AMBER = "#D97706";
-const AMBER_BG = "#FEF3C7";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, RED, RED_BG, AMBER, AMBER_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 function Gauge({ score }) {
   const color = score >= 75 ? TEAL : score >= 50 ? AMBER : RED;
   return (
     <div className="relative w-full flex flex-col items-center">
       <svg viewBox="0 0 200 120" className="w-48">
-        <path d="M20,100 A80,80 0 0,1 180,100" fill="none" stroke="#EDEFF2" strokeWidth="16" strokeLinecap="round" pathLength="100" />
+        <path d="M20,100 A80,80 0 0,1 180,100" fill="none" stroke="var(--track)" strokeWidth="16" strokeLinecap="round" pathLength="100" />
         <path
           d="M20,100 A80,80 0 0,1 180,100" fill="none" stroke={color} strokeWidth="16"
           strokeLinecap="round" pathLength="100"
@@ -183,7 +173,7 @@ export default function Results() {
   if (!result && !checkedDb) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#F6F7F9" }}>
-        <span className="w-8 h-8 border-4 border-gray-200 border-t-[#0F9D77] rounded-full animate-spin" />
+        <span className="w-8 h-8 border-4  border-t-[#0F9D77] rounded-full animate-spin" />
       </div>
     );
   }
@@ -224,7 +214,7 @@ export default function Results() {
 
   return (
     <div className="min-h-screen pb-24" style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }}>
-      <div className="bg-white border-b px-5 py-4" style={{ borderColor: BORDER }}>
+      <div className="border-b px-5 py-4" style={{ backgroundColor: "var(--bg-card)", borderColor: BORDER }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: TEAL_BG }}>
@@ -249,7 +239,7 @@ export default function Results() {
       </div>
 
       <div className="max-w-6xl mx-auto px-5 pt-8 space-y-6">
-        <div className="hover-lift bg-white rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}` }}>
+        <div className="hover-lift  rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
           <Gauge score={result.match_percentage} />
           <div className="flex-1 text-center md:text-left">
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full mb-2" style={{ backgroundColor: scoreLabelBg, color: scoreLabelColor }}>
@@ -284,7 +274,7 @@ export default function Results() {
         <CategoryReport categoryChecks={result.category_checks} />
 
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "80ms" }}>
+          <div className="hover-lift  rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay:"80ms" }}>
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
               <ListChecks size={14} /> Skills Check
             </p>
@@ -309,7 +299,7 @@ export default function Results() {
             })}
           </div>
 
-          <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "140ms" }}>
+          <div className="hover-lift  rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay:"140ms" }}>
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
               <ShieldCheck size={14} /> ATS Compatibility Check
             </p>
@@ -319,7 +309,7 @@ export default function Results() {
           </div>
         </div>
 
-        <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "180ms" }}>
+        <div className="hover-lift  rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay:"180ms" }}>
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
             <Layers size={14} /> Resume Sections Detected
           </p>
@@ -328,7 +318,7 @@ export default function Results() {
               const found = sectionsFound.includes(sec);
               const label = sec === "header" ? "Contact Info" : sec.charAt(0).toUpperCase() + sec.slice(1);
               return (
-                <span key={sec} className="text-sm px-3 py-1.5 rounded-full flex items-center gap-1.5" style={{ backgroundColor: found ? TEAL_BG : BG, color: found ? TEAL : "#B0B7C3", border: `1px solid ${found ? TEAL : BORDER}` }}>
+                <span key={sec} className="text-sm px-3 py-1.5 rounded-full flex items-center gap-1.5" style={{ backgroundColor: found ? TEAL_BG : BG, color: found ? TEAL : "var(--inactive)", border: `1px solid ${found ? TEAL : BORDER}` }}>
                   {found ? <Check size={12} strokeWidth={3} /> : <span style={{ fontSize: 10 }}>○</span>}
                   {label}
                 </span>
@@ -337,7 +327,7 @@ export default function Results() {
           </div>
         </div>
 
-        <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "220ms" }}>
+        <div className="hover-lift  rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay:"220ms" }}>
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
             <Tags size={14} /> All Skills Found in Your Resume ({result.resume_skills.length})
           </p>
@@ -350,7 +340,7 @@ export default function Results() {
           </div>
         </div>
 
-        <div className="hover-lift bg-white rounded-2xl p-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "260ms" }}>
+        <div className="hover-lift  rounded-2xl p-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay:"260ms" }}>
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
             <Lightbulb size={14} /> Suggestions to Improve Your Resume
           </p>

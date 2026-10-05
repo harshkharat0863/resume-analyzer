@@ -1,12 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Users, GraduationCap, Users2, ArrowRight } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const useCases = [
   {
@@ -58,7 +52,7 @@ export default function Organizations() {
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-5 tracking-wide" style={{ backgroundColor: TEAL_BG, color: TEAL }}>
           FOR ORGANIZATIONS
         </span>
@@ -75,8 +69,8 @@ export default function Organizations() {
           <div
             key={u.id}
             id={u.id}
-            className="hover-lift bg-white rounded-2xl p-7 animate-fade-in-up scroll-mt-20"
-            style={{ border: `1px solid ${BORDER}`, animationDelay: `${i * 80}ms` }}
+            className="hover-lift rounded-2xl p-7 animate-fade-in-up scroll-mt-20"
+            style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: `${i * 80}ms` }}
           >
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: TEAL_BG }}>

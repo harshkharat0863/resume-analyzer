@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { Shield } from "lucide-react";
 
-const TEAL = "#0F9D77";
-const GRAY = "#6B7280";
+import { TEAL, GRAY } from "../theme";
 
 export default function Footer() {
   return (

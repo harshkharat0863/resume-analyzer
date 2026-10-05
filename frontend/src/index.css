@@ -1,7 +1,128 @@
 @import "tailwindcss";
 
+/* ── CSS custom properties ─────────────────────────────── */
+:root {
+  /* Brand */
+  --teal:        #0F9D77;
+  --teal-bg:     #E7F7F1;
+  --red:         #E1493C;
+  --red-bg:      #FDECEB;
+  --amber:       #D97706;
+  --amber-bg:    #FEF3C7;
+  --blue:        #3B82F6;
+  --blue-bg:     #EFF6FF;
+
+  /* Text */
+  --ink:         #131B2E;
+  --gray:        #6B7280;
+  --gray-muted:  #9CA3AF;
+
+  /* Surfaces */
+  --bg:          #F6F7F9;
+  --bg-card:     #FFFFFF;
+  --bg-input:    #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-upload:   #FAFBFC;
+  --bg-search:   #F6F7F9;
+
+  /* Borders & shadows */
+  --border:      #E5E7EB;
+  --border-dark: #D1D5DB;
+  --shadow:      rgba(0,0,0,0.08);
+  --shadow-lg:   rgba(0,0,0,0.12);
+
+  /* Progress/chart neutrals */
+  --track:       #EDEFF2;
+  --grid:        #F0F0F0;
+  --badge-esc:   #F3F4F6;
+  --inactive:    #B0B7C3;
+  --minus-icon:  #D1D5DB;
+
+  /* Hero gradient */
+  --hero-gradient: linear-gradient(135deg, #f0fdf8 0%, #e8f4fd 50%, #f3e8ff 100%);
+
+  /* Dark section (GitHub-like) */
+  --dark-bg:     #0D1117;
+  --dark-card:   #161B22;
+  --dark-border: #21262D;
+  --dark-btn:    #1F2937;
+  --dark-gray:   #9CA3AF;
+  --dark-text:   #F1F5F9;
+
+  /* Overlay */
+  --overlay:     rgba(19,27,46,0.5);
+
+  /* Pro plan */
+  --pro-check-bg: rgba(15,157,119,0.2);
+
+  /* Spinner border */
+  --spinner-edge: rgba(255,255,255,0.4);
+}
+
+.dark {
+  /* Brand — brighter for dark bg */
+  --teal:        #10B981;
+  --teal-bg:     #064E3B;
+  --red:         #F87171;
+  --red-bg:      #450A0A;
+  --amber:       #FBBF24;
+  --amber-bg:    #451A03;
+  --blue:        #60A5FA;
+  --blue-bg:     #172554;
+
+  /* Text */
+  --ink:         #F1F5F9;
+  --gray:        #94A3B8;
+  --gray-muted:  #64748B;
+
+  /* Surfaces */
+  --bg:          #0F172A;
+  --bg-card:     #1E293B;
+  --bg-input:    #0F172A;
+  --bg-elevated: #1E293B;
+  --bg-upload:   #1E293B;
+  --bg-search:   #1E293B;
+
+  /* Borders & shadows */
+  --border:      #334155;
+  --border-dark: #475569;
+  --shadow:      rgba(0,0,0,0.4);
+  --shadow-lg:   rgba(0,0,0,0.5);
+
+  /* Progress/chart neutrals */
+  --track:       #334155;
+  --grid:        #1E293B;
+  --badge-esc:   #1E293B;
+  --inactive:    #475569;
+  --minus-icon:  #475569;
+
+  /* Hero gradient */
+  --hero-gradient: linear-gradient(135deg, #0d2818 0%, #0f172a 50%, #1a0a2e 100%);
+
+  /* Dark section stays dark (already dark in both modes) */
+  --dark-bg:     #020617;
+  --dark-card:   #0F172A;
+  --dark-border: #1E293B;
+  --dark-btn:    #1E293B;
+  --dark-gray:   #64748B;
+  --dark-text:   #F1F5F9;
+
+  /* Overlay */
+  --overlay:     rgba(0,0,0,0.7);
+
+  /* Pro plan */
+  --pro-check-bg: rgba(16,185,129,0.2);
+
+  /* Spinner border */
+  --spinner-edge: rgba(255,255,255,0.3);
+}
+
+/* ── Global styles ─────────────────────────────────────── */
 body {
   font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 h1, h2, h3 {
@@ -17,7 +138,6 @@ button, a {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .animate-fade-in-up {
   animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -26,7 +146,6 @@ button, a {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out both;
 }
@@ -37,4 +156,12 @@ button, a {
 .hover-lift:hover {
   transform: translateY(-3px);
   box-shadow: 0 16px 32px -12px rgba(15, 157, 119, 0.25);
+}
+
+/* ── Theme toggle animation ────────────────────────────── */
+.theme-toggle-track {
+  transition: background-color 0.3s ease;
+}
+.theme-toggle-thumb {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }

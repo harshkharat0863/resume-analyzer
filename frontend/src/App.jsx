@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -27,36 +28,38 @@ import CommandPalette from "./components/CommandPalette";
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <CommandPalette />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/results" element={<Results />} />
-          <Route path="/results/:id" element={<Results />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/cover-letter" element={<CoverLetter />} />
-          <Route path="/job-tracker" element={<JobTracker />} />
-          <Route path="/interview-prep" element={<InterviewPrep />} />
-          <Route path="/resume-builder" element={<ResumeBuilder />} />
-          <Route path="/resume-templates" element={<ResumeTemplates />} />
-          <Route path="/resume-examples" element={<ResumeExamples />} />
-          <Route path="/resume-guide" element={<ResumeGuide />} />
-          <Route path="/organizations" element={<Organizations />} />
-          <Route path="/resume-history" element={<ResumeHistory />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/resume-compare" element={<ResumeCompare />} />
-          <Route path="/share/:id" element={<SharedResult />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <CommandPalette />
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/results" element={<Results />} />
+            <Route path="/results/:id" element={<Results />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/cover-letter" element={<CoverLetter />} />
+            <Route path="/job-tracker" element={<JobTracker />} />
+            <Route path="/interview-prep" element={<InterviewPrep />} />
+            <Route path="/resume-builder" element={<ResumeBuilder />} />
+            <Route path="/resume-templates" element={<ResumeTemplates />} />
+            <Route path="/resume-examples" element={<ResumeExamples />} />
+            <Route path="/resume-guide" element={<ResumeGuide />} />
+            <Route path="/organizations" element={<Organizations />} />
+            <Route path="/resume-history" element={<ResumeHistory />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/resume-compare" element={<ResumeCompare />} />
+            <Route path="/share/:id" element={<SharedResult />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

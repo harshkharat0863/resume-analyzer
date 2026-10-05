@@ -3,15 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Mail, Lock, User, ShieldCheck, ArrowRight } from "lucide-react";
 import { signUp, signIn } from "../authApi";
 import { useAuth } from "../context/AuthContext";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const RED = "#E1493C";
-const RED_BG = "#FDECEB";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, RED, RED_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 export default function SignIn() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -57,7 +49,7 @@ export default function SignIn() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-5 py-10" style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }}>
-      <div className="hover-lift bg-white rounded-2xl p-8 w-full max-w-md animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
+      <div className="hover-lift rounded-2xl p-8 w-full max-w-md animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px var(--shadow)" }}>
         <div className="text-center mb-8">
           <div
             className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-lg mx-auto mb-4"
@@ -99,7 +91,7 @@ export default function SignIn() {
                   placeholder="John Smith"
                   required
                   className="w-full rounded-xl p-3 pl-10 text-sm focus:outline-none"
-                  style={{ border: `1px solid ${BORDER}`, color: INK }}
+                  style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
                 />
               </div>
             </div>
@@ -115,7 +107,7 @@ export default function SignIn() {
                 placeholder="you@example.com"
                 required
                 className="w-full rounded-xl p-3 pl-10 text-sm focus:outline-none"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               />
             </div>
           </div>
@@ -131,7 +123,7 @@ export default function SignIn() {
                 required
                 minLength={6}
                 className="w-full rounded-xl p-3 pl-10 text-sm focus:outline-none"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               />
             </div>
             {!isSignUp && (

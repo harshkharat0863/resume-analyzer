@@ -8,16 +8,7 @@ import {
   FileText, Target, CheckCircle2, ListChecks, FileDown, Zap,
   Upload, ArrowRight, ClipboardCheck, PenLine, Flag, Layers, Scale, Search,
 } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const RED = "#E1493C";
-const RED_BG = "#FDECEB";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
-const DARK = "#0D1117";
+import { TEAL, TEAL_BG, RED, RED_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const featureCards = [
   {
@@ -115,7 +106,7 @@ function MockupCard({ items }) {
   return (
     <div
       className="hover-lift rounded-2xl p-5 shadow-xl"
-      style={{ backgroundColor: "#fff", border: `1px solid ${BORDER}`, minWidth: 220 }}
+      style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, minWidth: 220 }}
     >
       {items.map((item, i) => (
         <div key={i} className="flex items-center gap-2 py-1.5 border-b last:border-0" style={{ borderColor: BORDER }}>
@@ -193,7 +184,7 @@ export default function Home() {
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
 
       {/* ── HERO ── */}
-      <div style={{ background: "linear-gradient(135deg, #f0fdf8 0%, #e8f4fd 50%, #f3e8ff 100%)" }}>
+      <div style={{ background: "var(--hero-gradient)" }}>
         <div className="max-w-6xl mx-auto px-5 py-16 grid md:grid-cols-2 gap-12 items-center">
           {/* Left */}
           <div className="animate-fade-in-up">
@@ -208,14 +199,14 @@ export default function Home() {
             </p>
 
             {/* Upload form */}
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 space-y-4" style={{ border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
+            <form onSubmit={handleSubmit} className="rounded-2xl p-6 space-y-4" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
               <div
                 onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
                 onDragLeave={() => setDragActive(false)}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current.click()}
                 className="rounded-xl p-6 text-center cursor-pointer transition-colors"
-                style={{ border: `2px dashed ${dragActive ? TEAL : BORDER}`, backgroundColor: dragActive ? TEAL_BG : "#FAFBFC" }}
+                style={{ border: `2px dashed ${dragActive ? TEAL : BORDER}`, backgroundColor: dragActive ? TEAL_BG : "var(--bg-upload)" }}
               >
                 <input ref={fileInputRef} type="file" accept=".pdf,.docx,.doc" onChange={(e) => handleFile(e.target.files[0])} className="hidden" />
                 <Upload size={24} color={dragActive ? TEAL : GRAY} strokeWidth={1.8} className="mx-auto mb-1 transition-colors" />
@@ -235,7 +226,7 @@ export default function Home() {
                 onChange={(e) => setJobDescription(e.target.value)}
                 placeholder="Paste the job description here..."
                 className="w-full rounded-xl p-3 text-sm focus:outline-none resize-none"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               />
 
               {error && <p className="text-sm rounded-lg p-2" style={{ backgroundColor: RED_BG, color: RED }}>{error}</p>}
@@ -267,7 +258,7 @@ export default function Home() {
           {/* Right — live preview mockup */}
           <div className="hidden md:flex items-center justify-center animate-fade-in-up" style={{ animationDelay: "150ms" }}>
             <div className="relative">
-              <div className="hover-lift rounded-2xl shadow-2xl p-5 w-80" style={{ backgroundColor: "#fff", border: `1px solid ${BORDER}` }}>
+              <div className="hover-lift rounded-2xl shadow-2xl p-5 w-80" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-2 h-2 rounded-full bg-red-400" />
                   <div className="w-2 h-2 rounded-full bg-yellow-400" />
@@ -277,7 +268,7 @@ export default function Home() {
                 <div className="flex items-center gap-4 mb-4">
                   <div className="relative w-20 h-20">
                     <svg viewBox="0 0 80 80" className="w-20 h-20 -rotate-90">
-                      <circle cx="40" cy="40" r="30" fill="none" stroke="#EDEFF2" strokeWidth="8" />
+                      <circle cx="40" cy="40" r="30" fill="none" stroke="var(--track)" strokeWidth="8" />
                       <circle cx="40" cy="40" r="30" fill="none" stroke={TEAL} strokeWidth="8" strokeLinecap="round" strokeDasharray="170 188" />
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -289,7 +280,7 @@ export default function Home() {
                     {[["CONTENT", "90%", TEAL], ["FORMAT", "84%", "#3B82F6"], ["STYLE", "40%", RED], ["SECTIONS", "40%", RED], ["SKILLS", "70%", "#D97706"]].map(([label, val, col]) => (
                       <div key={label} className="flex items-center gap-2 mb-1">
                         <span className="text-[10px] w-16" style={{ color: GRAY }}>{label}</span>
-                        <div className="flex-1 h-1.5 rounded-full" style={{ backgroundColor: "#EDEFF2" }}>
+                        <div className="flex-1 h-1.5 rounded-full" style={{ backgroundColor: "var(--track)" }}>
                           <div className="h-1.5 rounded-full" style={{ width: val, backgroundColor: col }} />
                         </div>
                         <span className="text-[10px]" style={{ color: col }}>{val}</span>
@@ -306,7 +297,7 @@ export default function Home() {
                 </div>
               </div>
               {/* Floating badge */}
-              <div className="absolute -top-4 -right-4 rounded-xl p-3 shadow-lg" style={{ backgroundColor: "#fff", border: `1px solid ${BORDER}` }}>
+              <div className="absolute -top-4 -right-4 rounded-xl p-3 shadow-lg" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
                 <p className="text-xs font-bold" style={{ color: TEAL }}>8 Issues Found</p>
                 <p className="text-[10px]" style={{ color: GRAY }}>Click to review</p>
               </div>
@@ -316,27 +307,27 @@ export default function Home() {
       </div>
 
       {/* ── DARK FEATURES SECTION ── */}
-      <div style={{ backgroundColor: DARK }} className="py-20 px-5">
+      <div style={{ backgroundColor: "var(--dark-bg)" }} className="py-20 px-5">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               The AI-powered Resume Checker goes<br />beyond typos and punctuation
             </h2>
-            <p className="text-[14px] max-w-2xl mx-auto leading-relaxed" style={{ color: "#9CA3AF" }}>
+            <p className="text-[14px] max-w-2xl mx-auto leading-relaxed" style={{ color: "var(--dark-gray)" }}>
               We've built various AI models to check your resume against what both ATS software and human recruiters look for. The tool checks for crucial things across different categories on your resume.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-4">
             {featureCards.map((card) => (
-              <div key={card.title} className="hover-lift rounded-2xl p-5" style={{ backgroundColor: "#161B22", border: "1px solid #21262D" }}>
+              <div key={card.title} className="hover-lift rounded-2xl p-5" style={{ backgroundColor: "var(--dark-card)", border: "1px solid var(--dark-border)" }}>
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ backgroundColor: TEAL_BG }}>
                   <card.icon size={19} color={TEAL} strokeWidth={2.2} />
                 </div>
                 <h3 className="font-semibold text-white mb-3">{card.title}</h3>
                 <div className="space-y-1.5">
                   {card.items.map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-xs" style={{ color: "#9CA3AF" }}>
+                    <div key={item} className="flex items-center gap-2 text-xs" style={{ color: "var(--dark-gray)" }}>
                       <span style={{ color: TEAL }}>✓</span> {item}
                     </div>
                   ))}
@@ -349,7 +340,7 @@ export default function Home() {
 
       {/* ── ALTERNATING SECTIONS ── */}
       {alternatingSection.map((section, i) => (
-        <div key={i} className="py-16 px-5" style={{ backgroundColor: i % 2 === 0 ? "#fff" : BG, borderTop: `1px solid ${BORDER}` }}>
+        <div key={i} className="py-16 px-5" style={{ backgroundColor: i % 2 === 0 ? "var(--bg-card)" : BG, borderTop: `1px solid ${BORDER}` }}>
           <div className={`max-w-5xl mx-auto flex flex-col ${section.imgLeft ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-12`}>
             {/* Text */}
             <div className="flex-1">
@@ -368,7 +359,7 @@ export default function Home() {
       ))}
 
       {/* ── FEATURES GRID ── */}
-      <div className="py-16 px-5" style={{ backgroundColor: "#fff", borderTop: `1px solid ${BORDER}` }}>
+      <div className="py-16 px-5" style={{ backgroundColor: "var(--bg-card)", borderTop: `1px solid ${BORDER}` }}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: INK }}>
@@ -404,12 +395,12 @@ export default function Home() {
       </div>
 
       {/* ── TOOLS DARK SECTION ── */}
-      <div style={{ backgroundColor: DARK }} className="py-20 px-5">
+      <div style={{ backgroundColor: "var(--dark-bg)" }} className="py-20 px-5">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
             Put your resume score to work
           </h2>
-          <p className="text-sm mb-8" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm mb-8" style={{ color: "var(--dark-gray)" }}>
             Checking is step one. ResumeCheck covers the rest of what you need to land the job.
           </p>
           <div className="flex flex-wrap justify-center gap-2 mb-10">
@@ -419,8 +410,8 @@ export default function Home() {
                 onClick={() => setActiveTab(i)}
                 className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95"
                 style={{
-                  backgroundColor: activeTab === i ? TEAL : "#1F2937",
-                  color: activeTab === i ? "#fff" : "#9CA3AF",
+                  backgroundColor: activeTab === i ? TEAL : "var(--dark-btn)",
+                  color: activeTab === i ? "#fff" : "var(--dark-gray)",
                   border: "none",
                 }}
               >
@@ -428,15 +419,15 @@ export default function Home() {
               </button>
             ))}
           </div>
-          <div className="rounded-2xl p-8 text-left animate-fade-in" key={activeTab} style={{ backgroundColor: "#161B22", border: "1px solid #21262D" }}>
+          <div className="rounded-2xl p-8 text-left animate-fade-in" key={activeTab} style={{ backgroundColor: "var(--dark-card)", border: "1px solid var(--dark-border)" }}>
             {activeTab === 0 && (
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="flex-1">
                   <h3 className="font-bold text-white text-lg mb-2">Resume Checker</h3>
-                  <p className="text-sm leading-relaxed mb-4" style={{ color: "#9CA3AF" }}>Upload your resume and instantly see your match score, ATS compatibility, skill gaps, and actionable suggestions to improve your chances.</p>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--dark-gray)" }}>Upload your resume and instantly see your match score, ATS compatibility, skill gaps, and actionable suggestions to improve your chances.</p>
                   <ul className="space-y-2">
                     {["Instant skill match score", "ATS compatibility check", "Missing skills detection", "Improvement suggestions"].map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "#9CA3AF" }}>
+                      <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "var(--dark-gray)" }}>
                         <span style={{ color: TEAL }}>✓</span> {item}
                       </li>
                     ))}
@@ -450,25 +441,25 @@ export default function Home() {
             {activeTab === 1 && (
               <div>
                 <h3 className="font-bold text-white text-lg mb-2">Skill Gap Analysis</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>See exactly which skills from the job description you have and which ones you're missing — with semantic matching that understands synonyms.</p>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--dark-gray)" }}>See exactly which skills from the job description you have and which ones you're missing — with semantic matching that understands synonyms.</p>
               </div>
             )}
             {activeTab === 2 && (
               <div>
                 <h3 className="font-bold text-white text-lg mb-2">ATS Check</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>Find out if your resume will pass the Applicant Tracking System filters most companies use before a human ever sees it.</p>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--dark-gray)" }}>Find out if your resume will pass the Applicant Tracking System filters most companies use before a human ever sees it.</p>
               </div>
             )}
             {activeTab === 3 && (
               <div>
                 <h3 className="font-bold text-white text-lg mb-2">Resume Tips</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>Get personalized, actionable tips based on your specific resume — from quantifying achievements to using stronger action verbs.</p>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--dark-gray)" }}>Get personalized, actionable tips based on your specific resume — from quantifying achievements to using stronger action verbs.</p>
               </div>
             )}
             {activeTab === 4 && (
               <div>
                 <h3 className="font-bold text-white text-lg mb-2">Job Tailoring</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>Paste any job description and get specific suggestions for tailoring your resume to that exact role — keywords, skills, and phrasing.</p>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--dark-gray)" }}>Paste any job description and get specific suggestions for tailoring your resume to that exact role — keywords, skills, and phrasing.</p>
               </div>
             )}
           </div>
@@ -486,7 +477,7 @@ export default function Home() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="hover-lift px-8 py-3.5 rounded-xl font-semibold inline-flex items-center gap-2"
-          style={{ backgroundColor: "#fff", color: TEAL }}
+          style={{ backgroundColor: "var(--bg-card)", color: TEAL }}
         >
           Upload Your Resume
           <ArrowRight size={16} />

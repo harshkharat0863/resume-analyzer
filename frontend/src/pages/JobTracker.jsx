@@ -3,19 +3,7 @@ import { Briefcase, Plus, X, Building2, Calendar, Trash2, FileText, Link2 } from
 import { useAuth } from "../context/AuthContext";
 import { getHistory } from "../authApi";
 import { getAllResults } from "../utils/resultsStore";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const AMBER = "#D97706";
-const AMBER_BG = "#FEF3C7";
-const RED = "#E1493C";
-const RED_BG = "#FDECEB";
-const BLUE = "#3B82F6";
-const BLUE_BG = "#EFF6FF";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, AMBER, AMBER_BG, RED, RED_BG, BLUE, BLUE_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const STATUSES = [
   { key: "applied", label: "Applied", color: BLUE, bg: BLUE_BG },
@@ -92,7 +80,7 @@ export default function JobTracker() {
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
           <Briefcase size={22} color={TEAL} />
         </div>
@@ -108,7 +96,7 @@ export default function JobTracker() {
         {/* Status summary */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
           {STATUSES.map((s) => (
-            <div key={s.key} className="hover-lift bg-white rounded-2xl p-4 text-center" style={{ border: `1px solid ${BORDER}` }}>
+            <div key={s.key} className="hover-lift rounded-2xl p-4 text-center" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
               <p className="text-2xl font-bold" style={{ color: s.color, fontFamily: "'Manrope', sans-serif" }}>{countByStatus(s.key)}</p>
               <p className="text-xs font-medium" style={{ color: GRAY }}>{s.label}</p>
             </div>
@@ -126,7 +114,7 @@ export default function JobTracker() {
             Add Application
           </button>
         ) : (
-          <form onSubmit={addJob} className="bg-white rounded-2xl p-5 mb-6 animate-fade-in-up" style={{ border: `1px solid ${BORDER}` }}>
+          <form onSubmit={addJob} className="rounded-2xl p-5 mb-6 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
             <div className="flex justify-between items-center mb-4">
               <p className="text-sm font-semibold" style={{ color: INK }}>New Application</p>
               <button type="button" onClick={() => setShowForm(false)}>
@@ -138,13 +126,13 @@ export default function JobTracker() {
                 type="text" value={company} onChange={(e) => setCompany(e.target.value)}
                 placeholder="Company name" autoFocus
                 className="rounded-xl p-3 text-sm focus:outline-none"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               />
               <input
                 type="text" value={role} onChange={(e) => setRole(e.target.value)}
                 placeholder="Job title"
                 className="rounded-xl p-3 text-sm focus:outline-none"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               />
             </div>
 
@@ -155,8 +143,8 @@ export default function JobTracker() {
               <select
                 value={linkedResumeId}
                 onChange={(e) => setLinkedResumeId(e.target.value)}
-                className="w-full rounded-xl p-3 text-sm focus:outline-none bg-white"
-                style={{ border: `1px solid ${BORDER}`, color: INK }}
+                className="w-full rounded-xl p-3 text-sm focus:outline-none"
+                style={{ border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" }}
               >
                 <option value="">None — don't link a resume</option>
                 {resumeOptions.map((r) => (
@@ -189,8 +177,8 @@ export default function JobTracker() {
               return (
                 <div
                   key={job.id}
-                  className="hover-lift bg-white rounded-2xl p-5 flex flex-col gap-3 animate-fade-in-up"
-                  style={{ border: `1px solid ${BORDER}`, animationDelay: `${i * 40}ms` }}
+                  className="hover-lift rounded-2xl p-5 flex flex-col gap-3 animate-fade-in-up"
+                  style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: `${i * 40}ms` }}
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-4 justify-between">
                     <div className="flex-1">

@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { MessageCircle, ChevronLeft, ChevronRight, Lightbulb, RotateCcw } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const categories = {
   "Behavioral": [
@@ -55,7 +49,7 @@ export default function InterviewPrep() {
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
           <MessageCircle size={22} color={TEAL} />
         </div>
@@ -76,7 +70,7 @@ export default function InterviewPrep() {
               onClick={() => switchCategory(cat)}
               className="px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: category === cat ? TEAL : "#fff",
+                backgroundColor: category === cat ? TEAL : "var(--bg-card)",
                 color: category === cat ? "#fff" : GRAY,
                 border: `1px solid ${category === cat ? TEAL : BORDER}`,
               }}
@@ -87,7 +81,7 @@ export default function InterviewPrep() {
         </div>
 
         {/* Question card */}
-        <div key={`${category}-${index}`} className="hover-lift bg-white rounded-2xl p-8 text-center animate-fade-in" style={{ border: `1px solid ${BORDER}` }}>
+        <div key={`${category}-${index}`} className="hover-lift rounded-2xl p-8 text-center animate-fade-in" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
           <p className="text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: GRAY }}>
             Question {index + 1} of {questions.length}
           </p>
@@ -114,11 +108,16 @@ export default function InterviewPrep() {
 
         {/* Navigation */}
         <div className="flex items-center justify-center gap-4 mt-6">
-          <button onClick={goPrev} className="hover-lift flex items-center gap-1 px-4 py-2 rounded-xl text-sm font-medium bg-white" style={{ border: `1px solid ${BORDER}`, color: INK }}>
+          <button onClick={goPrev} className="hover-lift flex items-center gap-1 px-4 py-2 rounded-xl text-sm font-medium" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, color: INK }}>
             <ChevronLeft size={16} />
             Previous
           </button>
-          <button onClick={() => switchCategory(category)} className="p-2 rounded-xl transition-colors hover:bg-gray-100">
+          <button
+            onClick={() => switchCategory(category)}
+            className="p-2 rounded-xl transition-colors"
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--bg)"}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+          >
             <RotateCcw size={16} color={GRAY} />
           </button>
           <button onClick={goNext} className="hover-lift flex items-center gap-1 px-4 py-2 rounded-xl text-sm font-medium text-white" style={{ backgroundColor: TEAL }}>

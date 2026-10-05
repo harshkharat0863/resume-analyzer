@@ -1,13 +1,7 @@
 import { useState } from "react";
 import jsPDF from "jspdf";
 import { Sparkles, Plus, Trash2, Download } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
-const BG = "#F6F7F9";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER, BG } from "../theme";
 
 const emptyExp = () => ({ id: Date.now() + Math.random(), title: "", company: "", duration: "", details: "" });
 const emptyEdu = () => ({ id: Date.now() + Math.random(), degree: "", school: "", year: "" });
@@ -143,11 +137,11 @@ export default function ResumeBuilder() {
     doc.save(`${name || "resume"}.pdf`);
   };
 
-  const inputStyle = { border: `1px solid ${BORDER}`, color: INK };
+  const inputStyle = { border: `1px solid ${BORDER}`, color: INK, backgroundColor: "var(--bg-input)" };
 
   return (
     <div style={{ backgroundColor: BG, fontFamily: "'Inter', sans-serif" }} className="min-h-screen pb-20">
-      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}` }}>
+      <div className="text-center py-14 px-5 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", borderBottom: `1px solid ${BORDER}` }}>
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TEAL_BG }}>
           <Sparkles size={22} color={TEAL} />
         </div>
@@ -162,7 +156,7 @@ export default function ResumeBuilder() {
       <div className="max-w-5xl mx-auto px-5 pt-10 grid md:grid-cols-2 gap-6">
         {/* Form */}
         <div className="space-y-4">
-          <div className="hover-lift bg-white rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ border: `1px solid ${BORDER}` }}>
+          <div className="hover-lift rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}` }}>
             <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: GRAY }}>Contact Info</p>
             <input placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-xl p-3 text-sm focus:outline-none" style={inputStyle} />
             <input placeholder="Job Title (e.g. Python Developer)" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full rounded-xl p-3 text-sm focus:outline-none" style={inputStyle} />
@@ -172,12 +166,12 @@ export default function ResumeBuilder() {
             </div>
           </div>
 
-          <div className="hover-lift bg-white rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "60ms" }}>
+          <div className="hover-lift rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "60ms" }}>
             <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: GRAY }}>Summary</p>
             <textarea rows={3} placeholder="2-3 sentences about your experience and goals" value={summary} onChange={(e) => setSummary(e.target.value)} className="w-full rounded-xl p-3 text-sm focus:outline-none resize-none" style={inputStyle} />
           </div>
 
-          <div className="hover-lift bg-white rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "100ms" }}>
+          <div className="hover-lift rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "100ms" }}>
             <div className="flex justify-between items-center">
               <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: GRAY }}>Experience</p>
               <button onClick={addExp} className="flex items-center gap-1 text-xs font-medium" style={{ color: TEAL }}>
@@ -187,17 +181,17 @@ export default function ResumeBuilder() {
             {experience.map((exp) => (
               <div key={exp.id} className="p-3 rounded-xl space-y-2" style={{ backgroundColor: BG }}>
                 <div className="flex justify-between gap-2">
-                  <input placeholder="Job Title" value={exp.title} onChange={(e) => updateExp(exp.id, "title", e.target.value)} className="flex-1 rounded-lg p-2 text-sm focus:outline-none bg-white" style={inputStyle} />
+                  <input placeholder="Job Title" value={exp.title} onChange={(e) => updateExp(exp.id, "title", e.target.value)} className="flex-1 rounded-lg p-2 text-sm focus:outline-none" style={inputStyle} />
                   <button onClick={() => removeExp(exp.id)}><Trash2 size={15} color="#E1493C" /></button>
                 </div>
-                <input placeholder="Company" value={exp.company} onChange={(e) => updateExp(exp.id, "company", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none bg-white" style={inputStyle} />
-                <input placeholder="Duration (e.g. 2022 - Present)" value={exp.duration} onChange={(e) => updateExp(exp.id, "duration", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none bg-white" style={inputStyle} />
-                <textarea rows={2} placeholder="Key responsibilities / achievements" value={exp.details} onChange={(e) => updateExp(exp.id, "details", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none resize-none bg-white" style={inputStyle} />
+                <input placeholder="Company" value={exp.company} onChange={(e) => updateExp(exp.id, "company", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none" style={inputStyle} />
+                <input placeholder="Duration (e.g. 2022 - Present)" value={exp.duration} onChange={(e) => updateExp(exp.id, "duration", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none" style={inputStyle} />
+                <textarea rows={2} placeholder="Key responsibilities / achievements" value={exp.details} onChange={(e) => updateExp(exp.id, "details", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none resize-none" style={inputStyle} />
               </div>
             ))}
           </div>
 
-          <div className="hover-lift bg-white rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "140ms" }}>
+          <div className="hover-lift rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "140ms" }}>
             <div className="flex justify-between items-center">
               <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: GRAY }}>Education</p>
               <button onClick={addEdu} className="flex items-center gap-1 text-xs font-medium" style={{ color: TEAL }}>
@@ -207,23 +201,23 @@ export default function ResumeBuilder() {
             {education.map((edu) => (
               <div key={edu.id} className="p-3 rounded-xl space-y-2" style={{ backgroundColor: BG }}>
                 <div className="flex justify-between gap-2">
-                  <input placeholder="Degree" value={edu.degree} onChange={(e) => updateEdu(edu.id, "degree", e.target.value)} className="flex-1 rounded-lg p-2 text-sm focus:outline-none bg-white" style={inputStyle} />
+                  <input placeholder="Degree" value={edu.degree} onChange={(e) => updateEdu(edu.id, "degree", e.target.value)} className="flex-1 rounded-lg p-2 text-sm focus:outline-none" style={inputStyle} />
                   <button onClick={() => removeEdu(edu.id)}><Trash2 size={15} color="#E1493C" /></button>
                 </div>
-                <input placeholder="School / University" value={edu.school} onChange={(e) => updateEdu(edu.id, "school", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none bg-white" style={inputStyle} />
-                <input placeholder="Year (e.g. 2024)" value={edu.year} onChange={(e) => updateEdu(edu.id, "year", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none bg-white" style={inputStyle} />
+                <input placeholder="School / University" value={edu.school} onChange={(e) => updateEdu(edu.id, "school", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none" style={inputStyle} />
+                <input placeholder="Year (e.g. 2024)" value={edu.year} onChange={(e) => updateEdu(edu.id, "year", e.target.value)} className="w-full rounded-lg p-2 text-sm focus:outline-none" style={inputStyle} />
               </div>
             ))}
           </div>
 
-          <div className="hover-lift bg-white rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "180ms" }}>
+          <div className="hover-lift rounded-2xl p-5 space-y-3 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "180ms" }}>
             <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: GRAY }}>Skills (comma-separated)</p>
             <input placeholder="Python, SQL, AWS, React" value={skills} onChange={(e) => setSkills(e.target.value)} className="w-full rounded-xl p-3 text-sm focus:outline-none" style={inputStyle} />
           </div>
         </div>
 
         {/* Live preview */}
-        <div className="hover-lift bg-white rounded-2xl p-6 h-fit sticky top-20 animate-fade-in-up" style={{ border: `1px solid ${BORDER}`, animationDelay: "60ms" }}>
+        <div className="hover-lift rounded-2xl p-6 h-fit sticky top-20 animate-fade-in-up" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, animationDelay: "60ms" }}>
           <div className="flex justify-between items-center mb-4">
             <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: GRAY }}>Live Preview</p>
             <button onClick={handleDownload} className="hover-lift flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg text-white" style={{ backgroundColor: TEAL }}>
@@ -231,7 +225,7 @@ export default function ResumeBuilder() {
             </button>
           </div>
 
-          <div className="p-5 rounded-xl" style={{ backgroundColor: "#fff", border: `1px solid ${BORDER}`, minHeight: 400 }}>
+          <div className="p-5 rounded-xl" style={{ backgroundColor: "var(--bg-card)", border: `1px solid ${BORDER}`, minHeight: 400 }}>
             <h2 className="text-xl font-bold" style={{ color: INK, fontFamily: "'Manrope', sans-serif" }}>{name || "Your Name"}</h2>
             <p className="text-sm font-medium mb-1" style={{ color: TEAL }}>{title || "Your Job Title"}</p>
             <p className="text-xs mb-4" style={{ color: GRAY }}>{[email, phone].filter(Boolean).join("  ·  ")}</p>

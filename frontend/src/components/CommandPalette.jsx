@@ -4,12 +4,7 @@ import {
     Search, Home, CheckCircle2, Sparkles, LayoutTemplate, FileSearch, BookOpen,
   PenTool, Briefcase, MessageCircle, Users, Info, DollarSign, History, LogIn, GitCompare,
 } from "lucide-react";
-
-const TEAL = "#0F9D77";
-const TEAL_BG = "#E7F7F1";
-const INK = "#131B2E";
-const GRAY = "#6B7280";
-const BORDER = "#E5E7EB";
+import { TEAL, TEAL_BG, INK, GRAY, BORDER } from "../theme";
 
 const pages = [
   { to: "/", label: "Home", icon: Home, group: "Main" },
@@ -80,13 +75,13 @@ export default function CommandPalette() {
   return (
     <div
       className="fixed inset-0 z-[100] flex items-start justify-center pt-24 px-5"
-      style={{ backgroundColor: "rgba(19,27,46,0.5)" }}
+      style={{ backgroundColor: "var(--overlay)" }}
       onClick={() => setOpen(false)}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-lg bg-white rounded-2xl overflow-hidden animate-fade-in-up"
-        style={{ boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}
+        className="w-full max-w-lg rounded-2xl overflow-hidden animate-fade-in-up"
+        style={{ backgroundColor: "var(--bg-card)", boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}
       >
         <div className="flex items-center gap-3 px-4 py-3" style={{ borderBottom: `1px solid ${BORDER}` }}>
           <Search size={18} color={GRAY} />
@@ -97,9 +92,9 @@ export default function CommandPalette() {
             onKeyDown={handleKeyNav}
             placeholder="Search pages... (e.g. cover letter, pricing)"
             className="flex-1 text-sm focus:outline-none"
-            style={{ color: INK }}
+            style={{ color: INK, backgroundColor: "transparent" }}
           />
-          <span className="text-[10px] font-medium px-2 py-1 rounded-md" style={{ backgroundColor: "#F3F4F6", color: GRAY }}>
+          <span className="text-[10px] font-medium px-2 py-1 rounded-md" style={{ backgroundColor: "var(--badge-esc)", color: GRAY }}>
             ESC
           </span>
         </div>
